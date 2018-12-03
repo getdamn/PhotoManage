@@ -208,16 +208,16 @@ int ApplicationType::ReadAllFromFile() {
 	cout << "\t ********* [ Read from disk ] *********" << endl;
 	photoList.clear();
 	RecordType record;
-	eventType * EventRec;
+	
 
 	ifstream inFile(this->inFileName);
 	while (record.ReadRecordFromFile(inFile)) {
 		photoList.push_back(record);
 		//record를 추가할때 event도 추가함.
-		EventRec = new eventType();
-		EventRec->SetEventName(record.GetEventName());
-		EventRec->AddFileName(record.GetPhotoName());
-		AddEventToList(*EventRec);
+		eventType EventRec;
+		EventRec.SetEventName(record.GetEventName());
+		EventRec.AddFileName(record.GetPhotoName());
+		AddEventToList(EventRec);
 	}
 	inFile.close();
 	return 1;
@@ -471,7 +471,7 @@ void ApplicationType::DisplayEventList()
 		eveFileList = eventList[i].GetFileNameList();
 		for (vector<string>::size_type j = 0; j < eveFileList.size(); j++)
 		{
-			cout << eveFileList[j] << ', ';
+			cout << eveFileList[j] << " ,";
 		}
 		cout << endl;
 	}

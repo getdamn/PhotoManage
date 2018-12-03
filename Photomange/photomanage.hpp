@@ -15,17 +15,17 @@ using namespace std;
 class RecordType {
 public:
 	int ReadRecordFromKB(); //read a record from kb
-	int ReadPhotoNameFromKB();//NEW ONE
+	int ReadPhotoNameFromKB();//read a photoname from kb
 	int ReadEventNameFromKB();//read a eventname from kb
 	int ReadSizeFromKB();//read a size(int) from kb
-	int ReadContentsFromKB();// read a contents from kb
+	int ReadContentsFromKB();// read contents from kb
 	int ReadRecordFromFile(ifstream &inFile); //read A record from file
-	int WriteRecordToFile(ofstream &outFile);//write a record to file
-	void GenFileName(string &name);//Generate File name using TimeNow funcion
+	int WriteRecordToFile(ofstream &outFile);//write A record to file
+	void GenFileName(string &name);//Generate File name using TimeNow function
 	void DisplayRecord(); //Display records on Screen
 	string GetPhotoName(); //returns photoname
-	string GetEventName();
-	string GetContents();
+	string GetEventName(); //returns eventname
+	string GetContents(); //return contents
 	bool IsEqual(string name); //compare photoNmae with input string
 	bool IsEqualEvent(string name);//compare event name
 	bool IsContentsIncluded(string name);//check this word is included
@@ -47,6 +47,9 @@ public:
 	vector<string> GetFileNameList();
 	void AddFileName(const string&);
 	void SetEventName(string);
+	bool operator<(eventType);
+	bool operator>(eventType);
+	//string operator=(eventType);
 private:
 	string eventName;
 	vector<string> memPhotoList;
@@ -61,6 +64,7 @@ public:
 		inFileName = "photo.dat";
 		outFileName = "photo.dat";
 	}
+	~ApplicationType() {}
 	int AddRecordTolist();//read a record from keyboard and add to the list
 	int ReadAllFromFile();
 	void DisplayAllOnScreen();
@@ -77,7 +81,7 @@ public:
 	int SearchEventList(const string&);
 	void DisplayEventList();
 	int RetrieveFromEventList();
-
+	
 	//void FindAndDisplay();
 	//void DeleteByName();
 private:
